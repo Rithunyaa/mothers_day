@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { margin: 0; overflow: hidden; }
+
+    #background {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      position: fixed;
+      top: 0; left: 0;
+    }
+
+    #envelope {
+      position: absolute;
+      width: 300px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%   { transform: translate(-50%, -50%); }
+      50%  { transform: translate(-50%, -60%); }
+      100% { transform: translate(-50%, -50%); }
+    }
+  </style>
+</head>
+<body>
+  <img src="assets/background.png" id="background">
+  <img src="assets/envelope.png" id="envelope">
+</body>
+</html>
