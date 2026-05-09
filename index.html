@@ -69,12 +69,12 @@ text-align: center;
 #nextbtn {
   font-family: serif;
   color: #ad237c;
-  font-size: 3vh;
+  font-size: 4vh;
   cursor: pointer;
   transition: transform 0.2s ease;
   position: absolute;
-  bottom: 28%;    /* tweak to move up/down */
-  right: 8%;     /* tweak to move left/right */
+  bottom: 9%;    /* tweak to move up/down */
+  right: 9%;     /* tweak to move left/right */
   z-index: 10;
 }
 
@@ -92,20 +92,27 @@ text-align: center;
   <p id="nextbtn" style="display:none">Next</p>
   </div>
 
-  <script>
-    document.getElementById('envelope').addEventListener('click', function() {
-      document.getElementById('background').src = 'assets/written_letter.png';
-      document.getElementById('envelope').style.display = 'none';
+<script>
+  document.getElementById('envelope').addEventListener('click', function() {
+    document.getElementById('background').src = 'assets/written_letter.png';
+    document.getElementById('envelope').style.display = 'none';
     document.getElementById('title').style.display = 'none';
     document.body.style.backgroundColor = '#fff3f3';
-    document.getElementById('background').style.maxHeight = '100vh';
     document.getElementById('inner').style.marginTop = '0';
     document.getElementById('background').style.maxHeight = '100vh';
     document.getElementById('background').style.maxWidth = '100vw';
     document.getElementById('background').style.width = '100vw';
     document.getElementById('background').style.height = '100vh';
-    document.getElementById('nextbtn').style.display = 'block';  // ← shows next button
-    });
-  </script>
+    document.getElementById('nextbtn').style.display = 'block';
+  });  
+
+  document.getElementById('nextbtn').addEventListener('click', function() {
+    document.getElementById('inner').style.display = 'none';
+    document.body.style.backgroundImage = 'url(assets/background_3.png)';
+    document.body.style.backgroundRepeat = 'repeat';
+    document.body.style.backgroundSize = 'auto';
+    document.body.style.backgroundColor = '';
+  });
+</script>
 </body>
 </html>
