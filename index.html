@@ -3,71 +3,64 @@
 <head>
   <style>
     body { 
-  margin: 0; 
-  overflow: hidden;
-  background-color: #f5f4f0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
+      margin: 0; 
+      overflow: hidden;
+      background-color: #f5f4f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-#container {
-  position: relative;
-  display: inline-block;
-  flex: 1;  /* ← this makes the container take up remaining space after the title */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
+    #inner {
+      position: relative;
+      display: inline-block;
+      margin-top: 20vh;  /* tweak this number to move it down more or less */
+    }
 
     #background {
-  display: block;
-  max-height: 80vh;  /* ← leaves room for the title at the top */
-  max-width: 100vw;
-  width: 100vw;
-  height: 100vh;
-  object-fit: contain;
-}
+      display: block;
+      max-height: calc(100vh - 10vh);
+      max-width: 100vw;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
 
     #envelope {
       position: absolute;
-      width: 60%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -40%) rotate(5deg);
+      width: 60%;        /* tweak this to make envelope bigger/smaller */
+      top: 55%;          /* tweak to move up/down */
+      left: 50%;         /* tweak to move left/right */
+      transform: translate(-50%, -50%) rotate(5deg);
       animation: wobble 2s ease-in-out infinite;
-      transition: transform 0.3s ease; /* smooth hover effect */
+      transition: transform 0.3s ease;
       cursor: pointer;
     }
 
     @keyframes wobble {
-  0%   { transform: translate(-50%, -40%) rotate(2deg); }
-  50%  { transform: translate(-50%, -40%) rotate(8deg); }
-  100% { transform: translate(-50%, -40%) rotate(2deg); }
-}
+      0%   { transform: translate(-50%, -50%) rotate(2deg); }
+      50%  { transform: translate(-50%, -50%) rotate(8deg); }
+      100% { transform: translate(-50%, -50%) rotate(2deg); }
+    }
 
-#envelope:hover {
-  transform: translate(-50%, -40%) scale(1.08) rotate(5deg);
-  animation-play-state: paused; /* stops wobble while hovering */
-}
-
+    #envelope:hover {
+      transform: translate(-50%, -50%) scale(1.08) rotate(5deg);
+      animation-play-state: paused;
+    }
   </style>
 </head>
 <body>
-  <div id="container">
+  <div id="inner">
     <img src="assets/Background_1.png" id="background">
     <img src="assets/Envelope.png" id="envelope">
   </div>
-  
-  <script>
-  document.getElementById('envelope').addEventListener('click', function() {
-    document.getElementById('background').src = 'assets/background_2.png';
-    document.getElementById('envelope').style.display = 'none';
-    
-  });
-</script>
 
+  <script>
+    document.getElementById('envelope').addEventListener('click', function() {
+      document.getElementById('background').src = 'assets/background_2.png';
+      document.getElementById('envelope').style.display = 'none';
+    });
+  </script>
 </body>
 </html>
