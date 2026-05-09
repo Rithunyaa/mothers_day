@@ -16,7 +16,7 @@
     #inner {
       position: relative;
       display: inline-block;
-      margin-top: 20vh;  /* tweak this number to move it down more or less */
+      margin-top: 20vh;
     }
 
     #background {
@@ -30,9 +30,9 @@
 
     #envelope {
       position: absolute;
-      width: 60%;        /* tweak this to make envelope bigger/smaller */
-      top: 55%;          /* tweak to move up/down */
-      left: 50%;         /* tweak to move left/right */
+      width: 60%;
+      top: 55%;
+      left: 50%;
       transform: translate(-50%, -50%) rotate(5deg);
       animation: wobble 2s ease-in-out infinite;
       transition: transform 0.3s ease;
@@ -52,35 +52,61 @@
 
     @font-face {
       font-family: 'MountainsOfChristmas';
-      src: url('assets/Mountains_of_Christmas/MountainsofChristmas-Regular.ttf')
+      src: url('assets/Mountains_of_Christmas/MountainsofChristmas-Regular.ttf');
     }
 
-    #title{
-font-family: 'MountainsOfChristmas', 'Times New Roman', Times, serif;
-color: #34220b;
-font-size: 10vh;
-margin: 0;
-margin-bottom: -125px;
-letter-spacing: 2px;
-text-align: center;
+    #title {
+      font-family: 'MountainsOfChristmas', 'Times New Roman', Times, serif;
+      color: #34220b;
+      font-size: 10vh;
+      margin: 0;
+      margin-bottom: -125px;
+      letter-spacing: 2px;
+      text-align: center;
+    }
 
-}
+    #nextbtn {
+      font-family: serif;
+      color: #ad237c;
+      font-size: 4vh;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      position: absolute;
+      bottom: 9%;
+      right: 9%;
+      z-index: 10;
+    }
 
-#nextbtn {
-  font-family: serif;
-  color: #ad237c;
-  font-size: 4vh;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-  position: absolute;
-  bottom: 9%;    /* tweak to move up/down */
-  right: 9%;     /* tweak to move left/right */
-  z-index: 10;
-}
+    #nextbtn:hover {
+      transform: scale(1.15);
+    }
 
-#nextbtn:hover {
-  transform: scale(1.15);
-}
+    .photo {
+      position: fixed;
+      width: 25%;
+      border: 6px solid white;
+      box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+    }
+
+    #prevArrow, #nextArrow {
+      display: none;
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 5vh;
+      cursor: pointer;
+      color: #ad237c;
+      font-family: 'MountainsOfChristmas', serif;
+      z-index: 100;
+      transition: transform 0.2s ease;
+    }
+
+    #prevArrow { left: 2%; }
+    #nextArrow { right: 2%; }
+
+    #prevArrow:hover, #nextArrow:hover {
+      transform: translateY(-50%) scale(1.2);
+    }
 
   </style>
 </head>
@@ -89,30 +115,98 @@ text-align: center;
   <div id="inner">
     <img src="assets/Background_1.png" id="background">
     <img src="assets/Envelope.png" id="envelope">
-  <p id="nextbtn" style="display:none">Next</p>
+    <p id="nextbtn" style="display:none">Next</p>
   </div>
+  <p id="prevArrow">←</p>
+  <p id="nextArrow">→</p>
 
-<script>
-  document.getElementById('envelope').addEventListener('click', function() {
-    document.getElementById('background').src = 'assets/written_letter.png';
-    document.getElementById('envelope').style.display = 'none';
-    document.getElementById('title').style.display = 'none';
-    document.body.style.backgroundColor = '#fff3f3';
-    document.getElementById('inner').style.marginTop = '0';
-    document.getElementById('background').style.maxHeight = '100vh';
-    document.getElementById('background').style.maxWidth = '100vw';
-    document.getElementById('background').style.width = '100vw';
-    document.getElementById('background').style.height = '100vh';
-    document.getElementById('nextbtn').style.display = 'block';
-  });  
+  <script>
+    const pages = [
+      // Page 1
+      ['assets/photo1.png', 'assets/photo2.png', 'assets/photo3.png'],
+      // Page 2
+      ['assets/photo4.png', 'assets/photo5.png', 'assets/photo6.png'],
+      // Page 3
+      ['assets/photo7.png', 'assets/photo8.png', 'assets/photo9.png'],
+    ];
 
-  document.getElementById('nextbtn').addEventListener('click', function() {
-    document.getElementById('inner').style.display = 'none';
-    document.body.style.backgroundImage = 'url(assets/background_3.png)';
-    document.body.style.backgroundRepeat = 'repeat';
-    document.body.style.backgroundSize = 'auto';
-    document.body.style.backgroundColor = '';
+    let currentPage = 0;
+
+    function showPage(pageIndex) {
+  document.querySelectorAll('.photo').forEach(p => p.remove());
+
+  const photos = pages[pageIndex];
+  const count = photos.length;
+
+  // figure out columns and rows based on number of photos
+  const cols = Math.ceil(Math.sqrt(count));
+  const rows = Math.ceil(count / cols);
+
+  photos.forEach((src, i) => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.classList.add('photo');
+
+    const col = i % cols;
+    const row = Math.floor(i / cols);
+
+    // evenly spaced across the screen with a little padding
+    const leftPercent = 10 + (col / cols) * 75;
+    const topPercent = 10 + (row / rows) * 75;
+
+    // small consistent nudge so it doesn't look too rigid
+    const nudgeX = (((i * 37) % 10) - 5);
+    const nudgeY = (((i * 53) % 10) - 5);
+
+    // consistent tilt per photo (not random each time)
+    const tilt = ((i * 7) % 10) - 5;
+
+    img.style.left = (leftPercent + nudgeX) + '%';
+    img.style.top = (topPercent + nudgeY) + '%';
+    img.style.transform = `rotate(${tilt}deg)`;
+
+    document.body.appendChild(img);
   });
-</script>
+
+  document.getElementById('prevArrow').style.display = pageIndex === 0 ? 'none' : 'block';
+  document.getElementById('nextArrow').style.display = pageIndex === pages.length - 1 ? 'none' : 'block';
+}
+
+    document.getElementById('envelope').addEventListener('click', function() {
+      document.getElementById('background').src = 'assets/written_letter.png';
+      document.getElementById('envelope').style.display = 'none';
+      document.getElementById('title').style.display = 'none';
+      document.body.style.backgroundColor = '#fff3f3';
+      document.getElementById('inner').style.marginTop = '0';
+      document.getElementById('background').style.maxHeight = '100vh';
+      document.getElementById('background').style.maxWidth = '100vw';
+      document.getElementById('background').style.width = '100vw';
+      document.getElementById('background').style.height = '100vh';
+      document.getElementById('nextbtn').style.display = 'block';
+    });
+
+    document.getElementById('nextbtn').addEventListener('click', function() {
+      document.getElementById('inner').style.display = 'none';
+      document.body.style.backgroundImage = 'url(assets/background_3.png)';
+      document.body.style.backgroundRepeat = 'repeat';
+      document.body.style.backgroundSize = 'auto';
+      document.body.style.backgroundColor = '';
+      showPage(0);
+    });
+
+    document.getElementById('nextArrow').addEventListener('click', function() {
+      if (currentPage < pages.length - 1) {
+        currentPage++;
+        showPage(currentPage);
+      }
+    });
+
+    document.getElementById('prevArrow').addEventListener('click', function() {
+      if (currentPage > 0) {
+        currentPage--;
+        showPage(currentPage);
+      }
+    });
+  </script>
 </body>
 </html>
