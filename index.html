@@ -66,7 +66,7 @@
     }
 
     #nextbtn {
-      font-family: serif;
+      font-family: 'MountainsOfChristmas', serif;
       color: #ad237c;
       font-size: 4vh;
       cursor: pointer;
@@ -81,29 +81,29 @@
       transform: scale(1.15);
     }
 
+    .photo-wrapper {
+      position: fixed;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     .photo {
-  width: 22vw;
-  height: 22vw;
-  object-fit: cover;
-  border: 6px solid white;
-  box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
-}
+      width: 22vw;
+      height: 22vw;
+      object-fit: cover;
+      border: 6px solid white;
+      box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+    }
 
-.photo-wrapper {
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.caption {
-  font-family: Arial, Helvetica, sans-serif, serif;
-  color: #34220b;
-  font-size: 4vh;
-  margin-top: 8px;
-  text-align: center;
-  max-width: 22vw;
-}
+    .caption {
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, serif;
+      color: #34220b;
+      font-size: 4vh;
+      margin-top: 8px;
+      text-align: center;
+      max-width: 22vw;
+    }
 
     #prevArrow, #nextArrow {
       display: none;
@@ -147,51 +147,51 @@
   ],
   // Page 2
   [
-    { src: 'images/photo4.jpg', caption: 'caption here' },
-    { src: 'images/photo5.jpg', caption: 'caption here' },
-    { src: 'images/photo6.jpg', caption: 'caption here' },
+    { src: 'images/Image(991).jpg', caption: 'your saree looks lovely' },
+    { src: 'images/Image(921).jpg', caption: 'you look tiny here!' },
+    { src: 'images/Image(922).jpg', caption: 'I assume this happened right after' },
   ],
 ];
+
 
     let currentPage = 0;
 
     function showPage(pageIndex) {
-  document.querySelectorAll('.photo-wrapper').forEach(p => p.remove());
+      document.querySelectorAll('.photo-wrapper').forEach(p => p.remove());
 
-  const photos = pages[pageIndex];
+      const photos = pages[pageIndex];
 
-  const positions = [
-    { left: 8,  top: 20 },   // photo 1 position
-    { left: 37, top: 20 },   // photo 2 position
-    { left: 66, top: 20 },   // photo 3 position
-  ];
+      const positions = [
+        { left: 8,  top: 20 },
+        { left: 37, top: 20 },
+        { left: 66, top: 20 },
+      ];
 
-  const tilts = [-4, 3, -2];
+      const tilts = [-4, 3, -2];
 
-  photos.forEach((item, i) => {
-    // wrapper holds photo + caption together
-    const wrapper = document.createElement('div');
-    wrapper.classList.add('photo-wrapper');
-    wrapper.style.left = positions[i].left + 'vw';
-    wrapper.style.top = positions[i].top + 'vh';
-    wrapper.style.transform = `rotate(${tilts[i]}deg)`;
+      photos.forEach((item, i) => {
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('photo-wrapper');
+        wrapper.style.left = positions[i].left + 'vw';
+        wrapper.style.top = positions[i].top + 'vh';
+        wrapper.style.transform = `rotate(${tilts[i]}deg)`;
 
-    const img = document.createElement('img');
-    img.src = item.src;
-    img.classList.add('photo');
+        const img = document.createElement('img');
+        img.src = item.src;
+        img.classList.add('photo');
 
-    const caption = document.createElement('p');
-    caption.classList.add('caption');
-    caption.textContent = item.caption;
+        const caption = document.createElement('p');
+        caption.classList.add('caption');
+        caption.textContent = item.caption;
 
-    wrapper.appendChild(img);
-    wrapper.appendChild(caption);
-    document.body.appendChild(wrapper);
-  });
+        wrapper.appendChild(img);
+        wrapper.appendChild(caption);
+        document.body.appendChild(wrapper);
+      });
 
-  document.getElementById('prevArrow').style.display = pageIndex === 0 ? 'none' : 'block';
-  document.getElementById('nextArrow').style.display = pageIndex === pages.length - 1 ? 'none' : 'block';
-}
+      document.getElementById('prevArrow').style.display = pageIndex === 0 ? 'none' : 'block';
+      document.getElementById('nextArrow').style.display = 'block';
+    }
 
     document.getElementById('envelope').addEventListener('click', function() {
       document.getElementById('background').src = 'assets/written_letter.png';
@@ -216,10 +216,8 @@
     });
 
     document.getElementById('nextArrow').addEventListener('click', function() {
-      if (currentPage < pages.length - 1) {
-        currentPage++;
-        showPage(currentPage);
-      }
+      currentPage++;
+      showPage(currentPage);
     });
 
     document.getElementById('prevArrow').addEventListener('click', function() {
