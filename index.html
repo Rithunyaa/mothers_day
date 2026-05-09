@@ -21,8 +21,23 @@
       width: 400px;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -40%);
+      transform: translate(-50%, -40%) rotate(5deg);
+      animation: wobble 2s ease-in-out infinite;
+      transition: transform 0.3s ease; /* smooth hover effect */
+      cursor: pointer;
     }
+
+    @keyframes wobble {
+  0%   { transform: translate(-50%, -40%) rotate(2deg); }
+  50%  { transform: translate(-50%, -40%) rotate(8deg); }
+  100% { transform: translate(-50%, -40%) rotate(2deg); }
+}
+
+#envelope:hover {
+  transform: translate(-50%, -40%) scale(1.08);
+  animation-play-state: paused; /* stops wobble while hovering */
+}
+
   </style>
 </head>
 <body>
