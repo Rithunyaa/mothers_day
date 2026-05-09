@@ -82,11 +82,13 @@
     }
 
     .photo {
-      position: fixed;
-      width: 25%;
-      border: 6px solid white;
-      box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
-    }
+  position: fixed;
+  width: 18vw;
+  height: 18vw;
+  object-fit: cover;    /* crops photo to fit the box, no stretching */
+  border: 6px solid white;
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+}
 
     #prevArrow, #nextArrow {
       display: none;
@@ -95,7 +97,7 @@
       transform: translateY(-50%);
       font-size: 5vh;
       cursor: pointer;
-      color: #ad237c;
+      color: #34220b;
       font-family: 'MountainsOfChristmas', serif;
       z-index: 100;
       transition: transform 0.2s ease;
@@ -123,7 +125,7 @@
   <script>
     const pages = [
       // Page 1
-      ['assets/photo1.png', 'assets/photo2.png', 'assets/photo3.png'],
+      ['images/photo3.bmp', 'images/Aaditya 002.jpg', 'images/Image(1003).jpg', 'images/DSC00324.JPG'],
       // Page 2
       ['assets/photo4.png', 'assets/photo5.png', 'assets/photo6.png'],
       // Page 3
@@ -138,33 +140,25 @@
   const photos = pages[pageIndex];
   const count = photos.length;
 
-  // figure out columns and rows based on number of photos
-  const cols = Math.ceil(Math.sqrt(count));
-  const rows = Math.ceil(count / cols);
+  // fixed positions for up to 5 photos — guaranteed no overlap
+  const positions = [
+    { left: 5,  top: 8  },
+    { left: 28, top: 8  },
+    { left: 51, top: 8  },
+    { left: 74, top: 8  },
+    { left: 16, top: 55 },
+    { left: 55, top: 55 },
+  ];
+
+  const tilts = [-4, 3, -2, 5, -3, 4];
 
   photos.forEach((src, i) => {
     const img = document.createElement('img');
     img.src = src;
     img.classList.add('photo');
-
-    const col = i % cols;
-    const row = Math.floor(i / cols);
-
-    // evenly spaced across the screen with a little padding
-    const leftPercent = 10 + (col / cols) * 75;
-    const topPercent = 10 + (row / rows) * 75;
-
-    // small consistent nudge so it doesn't look too rigid
-    const nudgeX = (((i * 37) % 10) - 5);
-    const nudgeY = (((i * 53) % 10) - 5);
-
-    // consistent tilt per photo (not random each time)
-    const tilt = ((i * 7) % 10) - 5;
-
-    img.style.left = (leftPercent + nudgeX) + '%';
-    img.style.top = (topPercent + nudgeY) + '%';
-    img.style.transform = `rotate(${tilt}deg)`;
-
+    img.style.left = positions[i].left + 'vw';
+    img.style.top = positions[i].top + 'vh';
+    img.style.transform = `rotate(${tilts[i]}deg)`;
     document.body.appendChild(img);
   });
 
