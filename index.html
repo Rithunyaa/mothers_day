@@ -66,6 +66,21 @@ text-align: center;
 
 }
 
+#nextbtn {
+  font-family: serif;
+  color: #ad237c;
+  font-size: 3vh;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  position: absolute;
+  margin-top: -210px;
+  margin-left: 500px;
+  z-index: 10;
+}
+
+#nextbtn:hover {
+  transform: scale(1.15);
+}
 
   </style>
 </head>
@@ -74,6 +89,7 @@ text-align: center;
   <div id="inner">
     <img src="assets/Background_1.png" id="background">
     <img src="assets/Envelope.png" id="envelope">
+  <p id="nextbtn" style="display:none">Next</p>
   </div>
 
   <script>
@@ -88,6 +104,7 @@ text-align: center;
     document.getElementById('background').style.maxWidth = '100vw';
     document.getElementById('background').style.width = '100vw';
     document.getElementById('background').style.height = '100vh';
+    document.getElementById('nextbtn').style.display = 'block';  // ← shows next button
     });
   </script>
 </body>
