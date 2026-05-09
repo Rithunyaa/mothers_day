@@ -82,12 +82,27 @@
     }
 
     .photo {
-  position: fixed;
-  width: 18vw;
-  height: 18vw;
-  object-fit: cover;    /* crops photo to fit the box, no stretching */
+  width: 22vw;
+  height: 22vw;
+  object-fit: cover;
   border: 6px solid white;
   box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+}
+
+.photo-wrapper {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.caption {
+  font-family: 'MountainsOfChristmas', serif;
+  color: #34220b;
+  font-size: 2vh;
+  margin-top: 8px;
+  text-align: center;
+  max-width: 22vw;
 }
 
     #prevArrow, #nextArrow {
@@ -124,42 +139,54 @@
 
   <script>
     const pages = [
-      // Page 1
-      ['images/photo3.bmp', 'images/Aaditya 002.jpg', 'images/Image(1003).jpg', 'images/DSC00324.JPG'],
-      // Page 2
-      ['assets/photo4.png', 'assets/photo5.png', 'assets/photo6.png'],
-      // Page 3
-      ['assets/photo7.png', 'assets/photo8.png', 'assets/photo9.png'],
-    ];
+  // Page 1
+  [
+    { src: 'images/photo1.jpg', caption: 'your silly caption here 😂' },
+    { src: 'images/photo2.jpg', caption: 'another caption here!' },
+    { src: 'images/photo3.jpg', caption: 'and another one!' },
+  ],
+  // Page 2
+  [
+    { src: 'images/photo4.jpg', caption: 'caption here' },
+    { src: 'images/photo5.jpg', caption: 'caption here' },
+    { src: 'images/photo6.jpg', caption: 'caption here' },
+  ],
+];
 
     let currentPage = 0;
 
     function showPage(pageIndex) {
-  document.querySelectorAll('.photo').forEach(p => p.remove());
+  document.querySelectorAll('.photo-wrapper').forEach(p => p.remove());
 
   const photos = pages[pageIndex];
-  const count = photos.length;
 
-  // fixed positions for up to 5 photos — guaranteed no overlap
   const positions = [
-    { left: 5,  top: 8  },
-    { left: 28, top: 8  },
-    { left: 51, top: 8  },
-    { left: 74, top: 8  },
-    { left: 16, top: 55 },
-    { left: 55, top: 55 },
+    { left: 8,  top: 20 },   // photo 1 position
+    { left: 37, top: 20 },   // photo 2 position
+    { left: 66, top: 20 },   // photo 3 position
   ];
 
-  const tilts = [-4, 3, -2, 5, -3, 4];
+  const tilts = [-4, 3, -2];
 
-  photos.forEach((src, i) => {
+  photos.forEach((item, i) => {
+    // wrapper holds photo + caption together
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('photo-wrapper');
+    wrapper.style.left = positions[i].left + 'vw';
+    wrapper.style.top = positions[i].top + 'vh';
+    wrapper.style.transform = `rotate(${tilts[i]}deg)`;
+
     const img = document.createElement('img');
-    img.src = src;
+    img.src = item.src;
     img.classList.add('photo');
-    img.style.left = positions[i].left + 'vw';
-    img.style.top = positions[i].top + 'vh';
-    img.style.transform = `rotate(${tilts[i]}deg)`;
-    document.body.appendChild(img);
+
+    const caption = document.createElement('p');
+    caption.classList.add('caption');
+    caption.textContent = item.caption;
+
+    wrapper.appendChild(img);
+    wrapper.appendChild(caption);
+    document.body.appendChild(wrapper);
   });
 
   document.getElementById('prevArrow').style.display = pageIndex === 0 ? 'none' : 'block';
