@@ -2,34 +2,31 @@
 <html>
 <head>
   <style>
-    body { margin: 0; overflow: hidden; }
+    body { 
+  margin: 0; 
+  overflow: hidden;
+  background-color: #f5f4f0;
+}
 
     #background {
       width: 100vw;
       height: 100vh;
-      object-fit: cover;
+      object-fit: contain;
       position: fixed;
       top: 0; left: 0;
     }
 
     #envelope {
       position: absolute;
-      width: 300px;
+      width: 400px;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
-      animation: float 3s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%   { transform: translate(-50%, -50%); }
-      50%  { transform: translate(-50%, -60%); }
-      100% { transform: translate(-50%, -50%); }
+      transform: translate(-50%, -40%);
     }
   </style>
 </head>
 <body>
-  <img src="assets/background.png" id="background">
-  <img src="assets/envelope.png" id="envelope">
+  <img src="assets/Background_1.png" id="background">
+  <img src="assets/Envelope.png" id="envelope">
 </body>
 </html>
