@@ -166,8 +166,14 @@
   // Page 5
   [
     { src: 'images/Aaditya 002.jpg' },
-    { src: 'images/DSC00300.' },
+    { src: 'images/DSC00300.JPG' },
     { src: 'images/IMG_2376.jpg' },
+  ],
+  // Page 6
+  [
+    { src: 'images/IMG_3006.JPG' },
+    { src: 'images/niagara 293.jpg' },
+    { src: 'images/02.jpg' },
   ],
 ];
 
@@ -212,7 +218,7 @@
     }
 
     document.getElementById('envelope').addEventListener('click', function() {
-      document.getElementById('background').src = 'assets/written_letter.png';
+      document.getElementById('bgmusic').play();  // ← starts music on first clickdocument.getElementById('background').src = 'assets/written_letter.png';
       document.getElementById('envelope').style.display = 'none';
       document.getElementById('title').style.display = 'none';
       document.body.style.backgroundColor = '#fff3f3';
@@ -245,5 +251,6 @@
       }
     });
   </script>
+  <audio id="bgmusic" src="assets/Manasula Soora Kaathey.mp3" loop></audio>
 </body>
 </html>
