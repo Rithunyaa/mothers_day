@@ -97,7 +97,7 @@
     }
 
     .caption {
-      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, serif;
+      font-family: 'Trebuchet MS', Arial, sans-serif;
       color: #34220b;
       font-size: 4vh;
       margin-top: 8px;
@@ -136,47 +136,53 @@
   </div>
   <p id="prevArrow">←</p>
   <p id="nextArrow">→</p>
+  <audio id="bgmusic" src="assets/Manasula Soora Kaathey.mp3" loop></audio>
 
   <script>
     const pages = [
-  // Page 1
-  [
-    { src: 'images/photo3.bmp',  },
-    { src: 'images/Image(1003).jpg'},
-    { src: 'images/IMG_2535.JPG' },
-  ],
-  // Page 2
-  [
-    { src: 'images/Image(991).jpg'},
-    { src: 'images/DSC00011.jpg' },
-    { src: 'images/IMG_2996.JPG' },
-  ],
-  // Page 3
-  [
-    { src: 'images/DSC00590.jpg' },
-    { src: 'images/DSC00324.JPG' },
-    { src: 'images/Image(922).jpg' },
-  ],
-  // Page 4
-  [
-    { src: 'images/ADVENTURE 143.jpg' },
-    { src: 'images/ADVENTURE 246.jpg' },
-    { src: 'images/IMG_2311.jpg' },
-  ],
-  // Page 5
-  [
-    { src: 'images/Aaditya 002.jpg' },
-    { src: 'images/DSC00300.JPG' },
-    { src: 'images/IMG_2376.jpg' },
-  ],
-  // Page 6
-  [
-    { src: 'images/IMG_3006.JPG' },
-    { src: 'images/niagara 293.jpg' },
-    { src: 'images/02.jpg' },
-  ],
-];
-
+      // Page 1
+      [
+        { src: 'images/photo3.bmp', caption: '' },
+        { src: 'images/Image(1003).jpg', caption: '' },
+        { src: 'images/IMG_2535.JPG', caption: '' },
+      ],
+      // Page 2
+      [
+        { src: 'images/Image(991).jpg', caption: '' },
+        { src: 'images/DSC00011.jpg', caption: '' },
+        { src: 'images/IMG_2996.JPG', caption: '' },
+      ],
+      // Page 3
+      [
+        { src: 'images/DSC00590.jpg', caption: '' },
+        { src: 'images/DSC00324.JPG', caption: '' },
+        { src: 'images/Image(922).jpg', caption: '' },
+      ],
+      // Page 4
+      [
+        { src: 'images/ADVENTURE 143.jpg', caption: '' },
+        { src: 'images/ADVENTURE 246.jpg', caption: '' },
+        { src: 'images/IMG_2311.jpg', caption: '' },
+      ],
+      // Page 5
+      [
+        { src: 'images/Aaditya 002.jpg', caption: '' },
+        { src: 'images/DSC00300.JPG', caption: '' },
+        { src: 'images/IMG_2376.jpg', caption: '' },
+      ],
+      // Page 6
+      [
+        { src: 'images/IMG_3006.JPG', caption: '' },
+        { src: 'images/niagara 293.jpg', caption: '' },
+        { src: 'images/02.jpg', caption: '' },
+      ],
+      // Page 7
+      [
+        { src: 'images/03.jpg', caption: '' },
+        { src: 'images/04 -64-3 (1).jpg', caption: '' },
+        { src: 'images/ADVENTURE 142.jpg', caption: '' },
+      ],
+    ];
 
     let currentPage = 0;
 
@@ -218,7 +224,8 @@
     }
 
     document.getElementById('envelope').addEventListener('click', function() {
-      document.getElementById('bgmusic').play();  // ← starts music on first clickdocument.getElementById('background').src = 'assets/written_letter.png';
+      document.getElementById('bgmusic').play();
+      document.getElementById('background').src = 'assets/written_letter.png';
       document.getElementById('envelope').style.display = 'none';
       document.getElementById('title').style.display = 'none';
       document.body.style.backgroundColor = '#fff3f3';
@@ -251,6 +258,5 @@
       }
     });
   </script>
-  <audio id="bgmusic" src="assets/Manasula Soora Kaathey.mp3" loop></audio>
 </body>
 </html>
